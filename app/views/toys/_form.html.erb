@@ -1,11 +1,16 @@
 <%= form_for @toy do |f| %>
-
+  <% if @toy.errors.present? %>
+    <% @toy.errors.full_messages.each do |m| %> <%= m %> <% end %>
+  <% end %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <em>insert collection select for Cat</em>
+  <div class='form-inline'>
+    <%= f.collection_select :cat_id, Cat.all,
+        :id, :name, {include_blank: false}, {class: "form-control"} %>
+  </div>
   <br>
   <br>
 
